@@ -82,11 +82,11 @@ jobs:
 
       - name: Build core + APKs
         id: build
-       # env:
-         # KEYSTORE_BASE64: ${{ secrets.KEYSTORE_BASE64 }}
-         # KEYSTORE_PASS: ${{ secrets.KEYSTORE_PASS }}
-         # ALIAS_NAME: ${{ secrets.ALIAS_NAME }}
-         # ALIAS_PASS: ${{ secrets.ALIAS_PASS }}
+        env:
+         KEYSTORE_BASE64: ${{ secrets.KEYSTORE_BASE64 }}
+         KEYSTORE_PASS: ${{ secrets.KEYSTORE_PASS }}
+         ALIAS_NAME: ${{ secrets.ALIAS_NAME }}
+         ALIAS_PASS: ${{ secrets.ALIAS_PASS }}
         run: bash scripts/build-and-package.sh
 
       - name: Upload build artifact
