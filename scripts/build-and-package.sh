@@ -22,7 +22,7 @@ cd "$NBA"
 # The upstream repo ships its own release.keystore, but we don't have
 # its password, so provide your own via the KEYSTORE_BASE64 secret --
 # see the setup note in the PR/README for the one-time keytool command.
-if [ -n "${KEYSTORE_BASE64:-}" ]; then
+if false && [ -n "${KEYSTORE_BASE64:-}" ]; then
   echo "$KEYSTORE_BASE64" | base64 -d > release.keystore
   echo "using the provided KEYSTORE_BASE64 keystore"
 else
