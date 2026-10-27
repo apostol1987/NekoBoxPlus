@@ -107,6 +107,7 @@ X_NET_HOST="${X_NET_SRC:-$WORKSPACE_HOST/net}"
 LIBNEKO_HOST="${LIBNEKO_SRC:-$WORKSPACE_HOST/libneko}"
 AMNEZIAWG_GO_HOST="${AMNEZIAWG_GO_SRC:-$WORKSPACE_HOST/amneziawg-go}"
 MASTERDNSVPN_HOST="${MASTERDNSVPN_SRC:-$WORKSPACE_HOST/MasterDnsVPN-plus}"
+SOAR_HOST="${SOAR_SRC:-$WORKSPACE_HOST/Soar}"
 BYEDPI_HOST="${BYEDPI_SRC:-$WORKSPACE_HOST/byedpi}"
 ADBLOCK_RESOURCES_HOST="${ADBLOCK_RESOURCES_SRC:-$WORKSPACE_HOST/adblock-resources}"
 ADBLOCK_RUST_HOST="${ADBLOCK_RUST_SRC:-$WORKSPACE_HOST/adblock-rust}"
@@ -179,6 +180,9 @@ fi
 if [ -d "$MASTERDNSVPN_HOST" ]; then
 	DOCKER_ARGS+=(-v "$MASTERDNSVPN_HOST:/workspace/MasterDnsVPN-plus")
 fi
+if [ -d "$SOAR_HOST" ]; then
+  DOCKER_ARGS+=(-v "$SOAR_HOST:/workspace/Soar")
+fi
 if [ -d "$BYEDPI_HOST" ]; then
 	DOCKER_ARGS+=(-v "$BYEDPI_HOST:/workspace/byedpi")
 fi
@@ -217,6 +221,7 @@ docker run --network host "${DOCKER_ARGS[@]}" "$IMAGE_NAME" bash -c '
   git config --global --add safe.directory /workspace/libneko
   git config --global --add safe.directory /workspace/amneziawg-go
   git config --global --add safe.directory /workspace/MasterDnsVPN-plus
+  git config --global --add safe.directory /workspace/Soar
   git config --global --add safe.directory /workspace/byedpi
   git config --global --add safe.directory /workspace/adblock-resources
   git config --global --add safe.directory /workspace/adblock-rust
