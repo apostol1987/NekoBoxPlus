@@ -210,6 +210,8 @@ replace github.com/sagernet/sing-snell => github.com/reF1nd/sing-snell v0.0.0-20
 
 replace masterdnsvpn-go => ../../MasterDnsVPN-plus
 
+replace soar => ../../soar
+
 replace github.com/sagernet/sing-vmess => ../../sing-vmess
 
 replace github.com/sagernet/sing-quic/congestion_bbr1 => ./protocol/trusttunnel/sing-trusttunnel/congestion_bbr1
