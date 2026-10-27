@@ -43,7 +43,11 @@ bash buildScript/lib/assets.sh
 # ad-block ruleset; ask if you want the real uBlock filter lists wired in too.
 mkdir -p "$ROOT/workspace/sing-box/common/adblock/adblockrust/resources/files"
 touch "$ROOT/workspace/sing-box/common/adblock/adblockrust/resources/files/placeholder.txt"
-
+if [ ! -d "$ROOT/workspace/Soar" ]; then
+  git clone https://github.com/getlantern/soar "$ROOT/workspace/Soar"
+  git -C "$ROOT/workspace/Soar" checkout <SHA>
+  git -C "$ROOT/workspace/Soar" apply "$ROOT/extra-patches/soar-nativeclient.patch"
+fi
 bash buildScript/lib/core.docker.sh
 
 [ -f app/libs/libcore.aar ] || { echo "app/libs/libcore.aar missing after core.docker.sh" >&2; exit 1; }
