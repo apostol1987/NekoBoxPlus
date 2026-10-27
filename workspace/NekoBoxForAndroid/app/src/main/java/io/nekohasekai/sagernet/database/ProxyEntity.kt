@@ -13,6 +13,7 @@ import io.nekohasekai.sagernet.fmt.hysteria.*
 import io.nekohasekai.sagernet.fmt.internal.ChainBean
 import io.nekohasekai.sagernet.fmt.internal.ProxySetBean
 import io.nekohasekai.sagernet.fmt.masterdns.MasterDnsVPNBean
+import io.nekohasekai.sagernet.fmt.soar.SoarBean
 import io.nekohasekai.sagernet.fmt.masque.MasqueBean
 import io.nekohasekai.sagernet.fmt.mieru.MieruBean
 import io.nekohasekai.sagernet.fmt.mieru.toUri
@@ -96,6 +97,7 @@ data class ProxyEntity(
     var juicityBean: JuicityBean? = null,
     var snellBean: SnellBean? = null,
     var masterDnsVPNBean: MasterDnsVPNBean? = null,
+    var soarBean: SoarBean? = null,
     var byeDPIBean: ByeDPIBean? = null,
     var sshBean: SSHBean? = null,
     var wgBean: WireGuardBean? = null,
@@ -144,6 +146,7 @@ data class ProxyEntity(
         const val TYPE_TAILSCALE = 32
         const val TYPE_OPENVPN = 33
         const val TYPE_OPENCONNECT = 34
+        const val TYPE_SOAR = 35
 
         const val TYPE_CONFIG = 998
         const val TYPE_NEKO = 999
@@ -237,6 +240,7 @@ data class ProxyEntity(
             TYPE_JUICITY -> juicityBean = KryoConverters.juicityDeserialize(byteArray)
             TYPE_SNELL -> snellBean = KryoConverters.snellDeserialize(byteArray)
             TYPE_MASTERDNSVPN -> masterDnsVPNBean = KryoConverters.masterDnsVPNDeserialize(byteArray)
+            TYPE_SOAR -> soarBean = KryoConverters.soarDeserialize(byteArray)
             TYPE_BYEDPI -> byeDPIBean = KryoConverters.byeDPIDeserialize(byteArray)
             TYPE_SHADOWTLS -> shadowTLSBean = KryoConverters.shadowTLSDeserialize(byteArray)
             TYPE_ANYTLS -> anyTLSBean = KryoConverters.anyTLSDeserialize(byteArray)
@@ -271,6 +275,7 @@ data class ProxyEntity(
         TYPE_JUICITY -> "Juicity"
         TYPE_SNELL -> "Snell"
         TYPE_MASTERDNSVPN -> "MasterDnsVPN"
+        TYPE_SOAR -> "Soar"
         TYPE_BYEDPI -> "ByeDPI"
         TYPE_SHADOWTLS -> "ShadowTLS"
         TYPE_ANYTLS -> "AnyTLS"
@@ -309,6 +314,7 @@ data class ProxyEntity(
             TYPE_JUICITY -> juicityBean
             TYPE_SNELL -> snellBean
             TYPE_MASTERDNSVPN -> masterDnsVPNBean
+            TYPE_SOAR -> soarBean
             TYPE_BYEDPI -> byeDPIBean
             TYPE_SHADOWTLS -> shadowTLSBean
             TYPE_ANYTLS -> anyTLSBean
@@ -556,6 +562,7 @@ data class ProxyEntity(
         juicityBean = null
         snellBean = null
         masterDnsVPNBean = null
+        soarBean = null
         byeDPIBean = null
         shadowTLSBean = null
         anyTLSBean = null
@@ -655,7 +662,10 @@ data class ProxyEntity(
                 type = TYPE_MASTERDNSVPN
                 masterDnsVPNBean = bean
             }
-
+            is SoarBean -> {
+                type = TYPE_SOAR
+                soarBean = bean
+            }
             is ByeDPIBean -> {
                 type = TYPE_BYEDPI
                 byeDPIBean = bean
@@ -746,6 +756,7 @@ data class ProxyEntity(
                 TYPE_JUICITY -> JuicitySettingsActivity::class.java
                 TYPE_SNELL -> SnellSettingsActivity::class.java
                 TYPE_MASTERDNSVPN -> MasterDnsVPNSettingsActivity::class.java
+                TYPE_SOAR -> SoarSettingsActivity::class.java
                 TYPE_BYEDPI -> ByeDPISettingsActivity::class.java
                 TYPE_SHADOWTLS -> ShadowTLSSettingsActivity::class.java
                 TYPE_ANYTLS -> AnyTLSSettingsActivity::class.java
